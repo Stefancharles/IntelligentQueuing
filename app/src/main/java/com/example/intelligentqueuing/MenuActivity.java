@@ -132,9 +132,9 @@ public class MenuActivity extends AppCompatActivity {
     }
     //轮询
     private void refreshData(){
-        message = Message.obtain();
-        message.what = FLAG_MSG;
-        handler.sendMessage(message);
+        message = Message.obtain();//从消息池获取空消息对象
+        message.what = FLAG_MSG;//标识信息，以便用不同的方式处理Message
+        handler.sendMessage(message);//立刻发送消息
     }
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
@@ -142,7 +142,7 @@ public class MenuActivity extends AppCompatActivity {
            if(msg.what==FLAG_MSG){
                getpeoplenumber();
            }
-           message = handler.obtainMessage(FLAG_MSG);
+           message = handler.obtainMessage(FLAG_MSG);//从消息池获取空消息对象，标识为FLAG_MSG
            handler.sendMessageDelayed(message,5000); // 延时5秒发送
         }
     };
